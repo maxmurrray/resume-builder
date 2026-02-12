@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 512 512">
+  <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #030303;
+      }
+
+      .st1 {
+        font-size: 59.3px;
+        stroke-width: 4px;
+      }
+
+      .st1, .st2, .st3, .st4, .st5, .st6 {
+        stroke-miterlimit: 10;
+      }
+
+      .st1, .st2, .st3, .st4, .st6 {
+        stroke: #231f20;
+      }
+
+      .st1, .st2, .st4 {
+        font-family: BasicSans-Regular, 'Basic Sans';
+      }
+
+      .st1, .st2, .st4, .st5 {
+        fill: #231f20;
+      }
+
+      .st2 {
+        font-size: 82.3px;
+      }
+
+      .st3, .st7 {
+        fill: #f5f5f7;
+      }
+
+      .st4 {
+        font-size: 420.6px;
+      }
+
+      .st5 {
+        stroke: #6d6e71;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <path class="st7" d="M102.4-640.7V-184.7h-372.3v-369.2h78.3c3.5,0,10.1-10.2,10.1-13.2v-73.7H102.4Z"/>
+  <text class="st2" transform="translate(916.3 383.1)"><tspan x="0" y="0">Resume.</tspan></text>
+  <path class="st0" d="M1055.4-385.2l375.8-.9,14.5,4.7-1.6,528.6-502.8-1.6-3.1-12.9.3-408.4c2.3-12.2,54.3-52.5,66.9-63.8,11.3-10.2,38.1-42.9,50.1-45.6Z"/>
+  <path class="st7" d="M1423.1-357.1c0,159.5,0,319,0,478.5-153.1,0-306.1,0-459.2,0,0,0,0-328.7,0-355.9,0-2.8.1-5.9,2.1-7.8,1.9-1.9,4.8-2.1,7.4-2.1,37.3-1.1,74.6-2.3,111.9-3.4,0-36.4-.1-72.9-.2-109.3,112.7,0,225.3,0,338,0Z"/>
+  <path class="st7" d="M1059.4-347.5c0,24.5.2,48.9.3,73.4,0,.2-73.6.2-79.9-1.1,17.5-28.3,53.4-52.9,79.6-73.1,0,.3,0,.6,0,.9Z"/>
+  <text class="st4" transform="translate(1328.6 98.6)"><tspan x="0" y="0">.</tspan></text>
+  <polygon class="st6" points="1388.5 -888.5 1388.5 -930.4 1367.9 -930.4 1346.6 -909.1 1346.6 -888.5 1388.5 -888.5"/>
+  <polygon class="st3" points="1381.3 -895.7 1381.3 -930.4 1346.6 -895.7 1381.3 -895.7"/>
+  <text class="st4" transform="translate(1807.4 -680.6)"><tspan x="0" y="0">.</tspan></text>
+  <line class="st5" x1="774.9" y1="-1044.2" x2="952.8" y2="-1044.2"/>
+  <line class="st5" x1="37.9" y1="-794.1" x2="426.7" y2="-794.1"/>
+  <line class="st5" x1="250.3" y1="-591" x2="639.1" y2="-591"/>
+  <line class="st5" x1="298.4" y1="-532.5" x2="687.2" y2="-532.5"/>
+  <line class="st5" x1="278.4" y1="-311.2" x2="667.2" y2="-311.2"/>
+  <g id="PPJaIl">
+    <image id="PPJaIl1" data-name="PPJaIl" width="566" height="800" transform="translate(1699.4 -926.9) scale(.6)" xlink:href="Untitled-6-1.png"/>
+  </g>
+  <g>
+    <polygon class="st6" points="121.4 36.3 106.9 50.9 161.2 50.9 461.1 50.9 461.1 461.1 50.9 461.1 50.9 161.2 50.9 106.9 36.3 121.4 36.3 475.7 475.7 475.7 475.7 36.3 121.4 36.3"/>
+    <polygon class="st3" points="50.9 161.2 50.9 461.1 461.1 461.1 461.1 50.9 161.2 50.9 161.2 161.2 50.9 161.2"/>
+    <polygon class="st6" points="161.2 161.2 161.2 50.9 106.9 50.9 50.9 106.9 50.9 161.2 161.2 161.2"/>
+    <polygon class="st3" points="142.4 142.4 142.4 50.9 50.9 142.4 142.4 142.4"/>
+    <text class="st1" transform="translate(167.9 100.5)"><tspan x="0" y="0">Resume.</tspan></text>
+  </g>
+  <text class="st1" transform="translate(1434.4 -877.8)"><tspan x="0" y="0">Resume.</tspan></text>
+</svg>
