@@ -15,18 +15,18 @@ export const metadata: Metadata = {
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
       : "http://localhost:3000"
   ),
-  title: "Resume — Build a beautiful resume",
+  title: "Resume. — Build a beautiful resume",
   description:
     "A minimal, elegant resume builder. Create an ATS-friendly resume in minutes.",
   openGraph: {
-    title: "Resume — Build a beautiful resume",
+    title: "Resume. — Build a beautiful resume",
     description:
       "A minimal, elegant resume builder. Create an ATS-friendly resume in minutes.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Resume — Build a beautiful resume",
+    title: "Resume. — Build a beautiful resume",
     description:
       "A minimal, elegant resume builder. Create an ATS-friendly resume in minutes.",
   },
