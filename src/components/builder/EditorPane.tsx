@@ -39,7 +39,6 @@ export default function EditorPane({
             key="header"
             sectionKey="header"
             title={SECTION_LABELS.header}
-            defaultOpen
             canMoveUp={false}
             canMoveDown={false}
           >
@@ -57,7 +56,6 @@ export default function EditorPane({
             key="summary"
             sectionKey="summary"
             title={SECTION_LABELS.summary}
-            defaultOpen
             onMoveUp={() => reorderSection("summary", "up")}
             onMoveDown={() => reorderSection("summary", "down")}
             canMoveUp={movableSections.indexOf("summary") > 0}
@@ -79,7 +77,6 @@ export default function EditorPane({
             key="experience"
             sectionKey="experience"
             title={SECTION_LABELS.experience}
-            defaultOpen
             onMoveUp={() => reorderSection("experience", "up")}
             onMoveDown={() => reorderSection("experience", "down")}
             canMoveUp={movableSections.indexOf("experience") > 0}
