@@ -33,7 +33,7 @@ export default function Home() {
       <AmbientAudio />
 
       {/* Hero */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 -mt-12">
+      <div className="flex-1 flex flex-col items-center justify-center px-5 sm:px-6 -mt-4 sm:-mt-12">
         <div className="text-center max-w-2xl animate-[fadeIn_0.8s_ease-out]">
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-primary leading-[1.1]">
             The best{" "}
@@ -71,17 +71,17 @@ export default function Home() {
           <p className="mt-3 text-sm text-tertiary">
             Create your resume in seconds, for free.
           </p>
-          <div className="mt-10">
+          <div className="mt-8 sm:mt-10">
             <Link
               href="/builder"
-              className="inline-flex items-center justify-center h-12 px-8 bg-accent text-white text-xs font-bold uppercase tracking-[0.08em] border border-primary transition-all duration-200 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none shadow-[4px_4px_0_#1d1d1f] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none"
+              className="inline-flex items-center justify-center h-11 px-6 sm:h-12 sm:px-8 bg-accent text-white text-xs font-bold uppercase tracking-[0.08em] border border-primary transition-all duration-200 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none shadow-[4px_4px_0_#1d1d1f] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none"
             >
               Start Building
             </Link>
           </div>
         </div>
 
-        <div className="mt-24 grid grid-cols-1 sm:grid-cols-3 gap-12 max-w-2xl w-full animate-[fadeIn_1s_ease-out_0.2s_both]">
+        <div className="mt-14 sm:mt-24 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-12 max-w-2xl w-full animate-[fadeIn_1s_ease-out_0.2s_both]">
           {[
             { title: "Live Preview", desc: "See changes as you type" },
             { title: "Three Templates", desc: "Modern, Classic, or Compact" },

@@ -14,6 +14,7 @@ const PAGE_HEIGHT = 1056;
 const MIN_ZOOM = 0.3;
 const MAX_ZOOM = 2;
 const ZOOM_STEP = 0.15;
+const MOBILE_BREAKPOINT = 768;
 
 export default function PreviewPane({ data }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -24,15 +25,26 @@ export default function PreviewPane({ data }: Props) {
   const [isPanning, setIsPanning] = useState(false);
   const panStart = useRef({ x: 0, y: 0, panX: 0, panY: 0 });
   const [overflow, setOverflow] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const scale = baseScale * zoom;
+
+  // Detect mobile
+  useEffect(() => {
+    function check() {
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    }
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   // Auto-fit base scale
   useEffect(() => {
     function updateScale() {
       if (!containerRef.current) return;
       const { width, height } = containerRef.current.getBoundingClientRect();
-      const padding = 48;
+      const padding = isMobile ? 24 : 48;
       const scaleX = (width - padding) / PAGE_WIDTH;
       const scaleY = (height - padding) / PAGE_HEIGHT;
       setBaseScale(Math.min(scaleX, scaleY, 1));
@@ -42,7 +54,7 @@ export default function PreviewPane({ data }: Props) {
     const observer = new ResizeObserver(updateScale);
     if (containerRef.current) observer.observe(containerRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [isMobile]);
 
   // Check overflow
   useEffect(() => {
@@ -51,8 +63,9 @@ export default function PreviewPane({ data }: Props) {
     setOverflow(contentHeight > PAGE_HEIGHT);
   }, [data]);
 
-  // Mouse wheel zoom
+  // Mouse wheel zoom (desktop only)
   useEffect(() => {
+    if (isMobile) return;
     const el = containerRef.current;
     if (!el) return;
     function handleWheel(e: WheelEvent) {
@@ -63,15 +76,15 @@ export default function PreviewPane({ data }: Props) {
     }
     el.addEventListener("wheel", handleWheel, { passive: false });
     return () => el.removeEventListener("wheel", handleWheel);
-  }, []);
+  }, [isMobile]);
 
-  // Panning handlers
+  // Panning handlers (desktop only)
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
-    if (e.button !== 0) return;
+    if (isMobile || e.button !== 0) return;
     setIsPanning(true);
     panStart.current = { x: e.clientX, y: e.clientY, panX: pan.x, panY: pan.y };
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
-  }, [pan]);
+  }, [pan, isMobile]);
 
   const handlePointerMove = useCallback((e: React.PointerEvent) => {
     if (!isPanning) return;
@@ -105,7 +118,7 @@ export default function PreviewPane({ data }: Props) {
       <div className="flex items-center justify-center gap-1 py-2 border-b border-border-light shrink-0">
         <button
           onClick={zoomOut}
-          className="w-7 h-7 flex items-center justify-center rounded text-secondary hover:text-primary hover:bg-border-light transition-colors duration-150"
+          className="w-8 h-8 sm:w-7 sm:h-7 flex items-center justify-center rounded text-secondary hover:text-primary hover:bg-border-light transition-colors duration-150"
           title="Zoom out"
         >
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -114,14 +127,14 @@ export default function PreviewPane({ data }: Props) {
         </button>
         <button
           onClick={resetView}
-          className="min-w-[48px] h-7 px-1.5 rounded text-[11px] font-medium text-secondary hover:text-primary hover:bg-border-light transition-colors duration-150 tabular-nums"
+          className="min-w-[48px] h-8 sm:h-7 px-1.5 rounded text-[11px] font-medium text-secondary hover:text-primary hover:bg-border-light transition-colors duration-150 tabular-nums"
           title="Reset zoom"
         >
           {zoomPercent}%
         </button>
         <button
           onClick={zoomIn}
-          className="w-7 h-7 flex items-center justify-center rounded text-secondary hover:text-primary hover:bg-border-light transition-colors duration-150"
+          className="w-8 h-8 sm:w-7 sm:h-7 flex items-center justify-center rounded text-secondary hover:text-primary hover:bg-border-light transition-colors duration-150"
           title="Zoom in"
         >
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -133,16 +146,19 @@ export default function PreviewPane({ data }: Props) {
       {/* Preview area */}
       <div
         ref={containerRef}
-        className="flex-1 overflow-hidden relative"
-        style={{ cursor: isPanning ? "grabbing" : "grab" }}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={handlePointerUp}
+        className={`flex-1 relative ${isMobile ? "overflow-auto" : "overflow-hidden"}`}
+        style={{ cursor: isMobile ? "default" : isPanning ? "grabbing" : "grab" }}
+        onPointerDown={isMobile ? undefined : handlePointerDown}
+        onPointerMove={isMobile ? undefined : handlePointerMove}
+        onPointerUp={isMobile ? undefined : handlePointerUp}
+        onPointerCancel={isMobile ? undefined : handlePointerUp}
       >
         <div
-          className="absolute inset-0 flex items-start justify-center py-6"
-          style={{
+          className={isMobile
+            ? "flex justify-center py-4 px-2 min-h-full"
+            : "absolute inset-0 flex items-start justify-center py-6"
+          }
+          style={isMobile ? undefined : {
             transform: `translate(${pan.x}px, ${pan.y}px)`,
           }}
         >

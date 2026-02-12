@@ -1,13 +1,14 @@
 "use client";
 
 import { useResume } from "@/hooks/useResume";
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import TopBar from "@/components/builder/TopBar";
 import EditorPane from "@/components/builder/EditorPane";
 import PreviewPane from "@/components/builder/PreviewPane";
 
 const MIN_EDITOR = 320;
 const MAX_EDITOR = 700;
+const MOBILE_BREAKPOINT = 768;
 
 export default function BuilderPage() {
   const { data, loaded, updateData, setTemplate, reorderSection, resetData } =
@@ -15,6 +16,18 @@ export default function BuilderPage() {
   const [editorWidth, setEditorWidth] = useState(420);
   const [isDragging, setIsDragging] = useState(false);
   const dragStart = useRef({ x: 0, width: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileTab, setMobileTab] = useState<"editor" | "preview">("editor");
+
+  // Detect mobile
+  useEffect(() => {
+    function check() {
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    }
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const handlePointerDown = useCallback(
     (e: React.PointerEvent) => {
@@ -55,35 +68,75 @@ export default function BuilderPage() {
         onTemplateChange={setTemplate}
         onReset={resetData}
       />
-      <div className="flex-1 flex overflow-hidden">
-        {/* Editor */}
-        <div
-          className="shrink-0 overflow-hidden"
-          style={{ width: editorWidth }}
-        >
-          <EditorPane
-            data={data}
-            updateData={updateData}
-            reorderSection={reorderSection}
-          />
-        </div>
 
-        {/* Drag handle */}
-        <div
-          className="w-1 shrink-0 cursor-col-resize relative group"
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          onPointerCancel={handlePointerUp}
-        >
-          <div className={`absolute inset-0 transition-colors duration-150 ${isDragging ? "bg-accent" : "bg-border-light group-hover:bg-border"}`} />
+      {/* Mobile tab toggle */}
+      {isMobile && (
+        <div className="flex border-b border-border-light shrink-0 bg-surface">
+          <button
+            onClick={() => setMobileTab("editor")}
+            className={`flex-1 py-2.5 text-xs font-medium transition-colors duration-150 ${
+              mobileTab === "editor"
+                ? "text-accent border-b-2 border-accent"
+                : "text-secondary"
+            }`}
+          >
+            Editor
+          </button>
+          <button
+            onClick={() => setMobileTab("preview")}
+            className={`flex-1 py-2.5 text-xs font-medium transition-colors duration-150 ${
+              mobileTab === "preview"
+                ? "text-accent border-b-2 border-accent"
+                : "text-secondary"
+            }`}
+          >
+            Preview
+          </button>
         </div>
+      )}
 
-        {/* Preview */}
+      {isMobile ? (
+        /* Mobile: show one pane at a time */
         <div className="flex-1 overflow-hidden">
-          <PreviewPane data={data} />
+          {mobileTab === "editor" ? (
+            <EditorPane
+              data={data}
+              updateData={updateData}
+              reorderSection={reorderSection}
+            />
+          ) : (
+            <PreviewPane data={data} />
+          )}
         </div>
-      </div>
+      ) : (
+        /* Desktop: side-by-side with drag handle */
+        <div className="flex-1 flex overflow-hidden">
+          <div
+            className="shrink-0 overflow-hidden"
+            style={{ width: editorWidth }}
+          >
+            <EditorPane
+              data={data}
+              updateData={updateData}
+              reorderSection={reorderSection}
+            />
+          </div>
+
+          <div
+            className="w-1 shrink-0 cursor-col-resize relative group"
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerUp}
+          >
+            <div className={`absolute inset-0 transition-colors duration-150 ${isDragging ? "bg-accent" : "bg-border-light group-hover:bg-border"}`} />
+          </div>
+
+          <div className="flex-1 overflow-hidden">
+            <PreviewPane data={data} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

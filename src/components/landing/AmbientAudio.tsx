@@ -132,7 +132,7 @@ export default function AmbientAudio() {
   return (
     <button
       onClick={playing ? stop : start}
-      className="fixed bottom-6 right-6 z-50 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm border border-border shadow-[0_2px_8px_rgba(0,0,0,0.06)] flex items-center justify-center transition-all duration-200 hover:bg-white hover:shadow-[0_2px_12px_rgba(0,0,0,0.1)] active:scale-[0.95]"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/80 backdrop-blur-sm border border-border shadow-[0_2px_8px_rgba(0,0,0,0.06)] flex items-center justify-center transition-all duration-200 hover:bg-white hover:shadow-[0_2px_12px_rgba(0,0,0,0.1)] active:scale-[0.95]"
       aria-label={playing ? "Pause ambient music" : "Play ambient music"}
       title={playing ? "Pause music" : "Play ambient music"}
     >
